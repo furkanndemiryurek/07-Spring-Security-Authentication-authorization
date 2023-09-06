@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<p>My Home Page</p>
+<form action="#" th:action="@{/logout}" method="POST">
+
+    <hr>
+
+    <p>
+        User : <span sec:authentication="principal.username"> </span>
+        <br>
+        Role(s) : <span sec:authentication="principal.authorities"> </span>
+    </p>
+
+
+    <span>
+        <a th:href="@{/leaders}">Manager page</a>
+        (Only for manager role)
+    </span>
+<br>
+    <span>
+        <a th:href="@{/systems}">Admin page</a>
+        (Only for admin role)
+    </span>
+
+    <p sec:authorize="hasRole('EMPLOYEE')"> Only those with the EMPLOYEE role can see this text </p>
+    <p sec:authorize="hasRole('MANAGER')"> Only those with the MANAGER role can see this text </p>
+    <p sec:authorize="hasRole('ADMIN')"> Only those with the ADMIN role can see this text</p>
+
+
+
+    <hr>
+
+    <button type="submit" value="Logout">Log out!</button>
+
+</form>
+</body>
+</html>
